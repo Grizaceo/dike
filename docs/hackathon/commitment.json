@@ -1,0 +1,53 @@
+{
+  "_aviso_huella_omitida": "document_sha256 y document_bytes omitidos por defecto. La huella del escrito no viaja en este compromiso.",
+  "advertencias": [
+    "Diké verifica que estas normas existan, sean citables y estén vigentes; NO verifica que fundamenten sustantivamente lo que el escrito afirma.  Esa fundamentación es juicio del abogado.",
+    "El texto menciona normas sin artículo pinpoint que el gate no verificó: no son citas verificables tal cual, pero existen y no deben darse por comprobadas."
+  ],
+  "alcance": "La constancia acredita identidad de la referencia, integridad del texto fuente, provenance y vigencia; no certifica la corrección de interpretaciones o paráfrasis.",
+  "as_of": "2026-10-06",
+  "citas_fallidas": 2,
+  "citas_verificadas": 4,
+  "fecha_constancia": "2026-10-06T06:16:52Z",
+  "normas_verificadas": [
+    {
+      "cuerpo": "Código del Trabajo art. 161",
+      "estado": "VERIFICADA",
+      "fuente_url": "https://nuevo.leychile.cl/servicios/Navegar/get_norma_json?idNorma=207436",
+      "gid": "cl.norma.ct:art:0161",
+      "texto_hash": "0c3c636d5119921c80a08c59dc81ef5d953220c465c0de555a261f2412325e88",
+      "vigencia": "IN_FORCE",
+      "vigencia_legible": "vigente"
+    },
+    {
+      "cuerpo": "Código del Trabajo art. 162",
+      "estado": "VERIFICADA",
+      "fuente_url": "https://nuevo.leychile.cl/servicios/Navegar/get_norma_json?idNorma=207436",
+      "gid": "cl.norma.ct:art:0162",
+      "texto_hash": "46b091ba8b23fcb071fd62ef871095961490f17d271a2bba8d4e91b4b1477e7d",
+      "vigencia": "IN_FORCE",
+      "vigencia_legible": "vigente"
+    },
+    {
+      "cuerpo": "Código del Trabajo art. 163",
+      "estado": "VERIFICADA",
+      "fuente_url": "https://nuevo.leychile.cl/servicios/Navegar/get_norma_json?idNorma=207436",
+      "gid": "cl.norma.ct:art:0163",
+      "texto_hash": "6d0567d48d304afc66342fdad0d53de15288e5f628b959d713dc710ebfd49b88",
+      "vigencia": "IN_FORCE",
+      "vigencia_legible": "vigente"
+    },
+    {
+      "cuerpo": "Código del Trabajo art. 168",
+      "estado": "VERIFICADA",
+      "fuente_url": "https://nuevo.leychile.cl/servicios/Navegar/get_norma_json?idNorma=207436",
+      "gid": "cl.norma.ct:art:0168",
+      "texto_hash": "6d33e1705ff1793f901b91553342f8c766f0f54146d264084ac04b80c0bdf3ed",
+      "vigencia": "IN_FORCE",
+      "vigencia_legible": "vigente"
+    }
+  ],
+  "pack_hash": "ea28fa1c0f9af6c1",
+  "schema_version": "dike-constancia-commitment-v2",
+  "total_citas": 6
+}

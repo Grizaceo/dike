@@ -1,0 +1,8 @@
+{
+  "algorithm": "ed25519",
+  "commitment_hash": "a981036de88ffc2dfec95ecf33421fa08adbda334975cf04477ff5ef450b1b8f",
+  "key_id": "3c7b3fde075efbe3",
+  "role": "content-integrity",
+  "schema_version": "dike-content-signature-v2",
+  "signature": "89ada687cd47bbbc35978d4f04162b122ab829d35f8da27c066cf6a80c41ad6f35d07fd430997a8b8f0077d8de9993af1c0ebdc37c8537aebf0efc90dc929e03"
+}
