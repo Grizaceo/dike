@@ -79,7 +79,7 @@ def test_failed_install_is_not_published_and_can_retry(tmp_path, monkeypatch):
     m, corpus, data = setup_runtime(tmp_path, monkeypatch)
     digest = package(corpus, 'v1')
     monkeypatch.setattr(m, '_dike', lambda *a: subprocess.CompletedProcess([], 2, '{}', 'failure'))
-    with pytest.raises(ValueError, match='installation failed'):
+    with pytest.raises(subprocess.CalledProcessError):
         m._asegurar_corpus(data)
     assert not (data / 'generations' / digest).exists()
     assert not list((data / 'generations').glob('staging-*'))

@@ -143,8 +143,11 @@ official text of today: the `pack_hash` in every commitment says which copy.
 - **Identifiers under `lexo.cl`.** The corpus format uses `https://lexo.cl/…`
   as identifier prefix. Those are names, not links, and that domain does not
   belong to this project.
-- **No license yet.** Until one is added, no rights are granted beyond reading
-  the code.
+- **License.** The code, schemas, and verification scripts in this repository
+  are licensed under the [MIT License](LICENSE). The statutory snapshot under
+  `corpus/` (and mirrored in `hermes-plugin/corpus/`) is governed by the
+  official public-source conditions of the Biblioteca del Congreso Nacional de
+  Chile (Ley Chile), as documented in [`corpus/README.md`](corpus/README.md).
 
 ## Where this code comes from
 

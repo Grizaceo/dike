@@ -54,3 +54,48 @@ def test_installed_tamper_fails_closed(real):
 def test_generated_copy_identical():
     result = subprocess.run([sys.executable, str(ROOT / 'scripts/generar_hermes_plugin.py'), '--check'], capture_output=True, text=True)
     assert result.returncode == 0, result.stdout
+
+
+def test_real_sin_citas_preserves_abstention(real):
+    result = json.loads(real[0].verificar_citas({'texto': 'La Ley 19.496 y el Código Civil.'}))
+    assert 'error' not in result, result
+    assert result['veredicto'] == 'SIN_CITAS'
+    assert result['todo_verificado'] is False
+    assert result['todas_citas_detectadas_verificadas'] is False
+    assert 'Ley 19.496' in result['no_verificadas']
+
+
+def test_real_verified_article_with_unverified_mention(real):
+    result = json.loads(real[0].verificar_citas({'texto': 'Conforme al artículo 161 del Código del Trabajo y a la Ley 99.999.'}))
+    assert 'error' not in result, result
+    assert result['todas_citas_detectadas_verificadas'] is True
+    assert result['todo_verificado'] is False
+    assert 'Ley 99.999' in result['no_verificadas']
+    assert 'detectadas' in result['mensaje']
+    assert result['certificacion_vigencia_actual'] is False
+    assert result['evidencia_temporal'][0]['antiguedad_dias'] >= 0
+
+
+def test_real_valid_file_input(real, tmp_path):
+    path = tmp_path / 'escrito.md'
+    path.write_text('artículo 161 del Código del Trabajo', encoding='utf-8')
+    result = json.loads(real[0].verificar_citas({'ruta': str(path)}))
+    assert 'error' not in result, result
+    assert result['meta']['citas_verificadas'] == 1
+    assert result['todas_citas_detectadas_verificadas'] is True
+    assert str(path) not in json.dumps(result)
+
+
+def test_real_sin_corpus_preserves_reason(real, monkeypatch, tmp_path):
+    m = real[0]
+    empty_runtime = tmp_path / 'empty-runtime'
+    empty_runtime.mkdir()
+    (empty_runtime / 'home').mkdir()
+    (empty_runtime / 'config.yaml').write_text('starter:\n  user: hermes\n')
+    monkeypatch.setattr(m, '_asegurar_corpus', lambda data: {'generation': str(empty_runtime)})
+    result = json.loads(m.verificar_citas({'texto': 'artículo 161 del Código del Trabajo'}))
+    assert 'error' not in result, result
+    assert result['veredicto'] == 'SIN_CORPUS'
+    assert result['meta']['pack_hash'] == 'sin-corpus'
+    assert result['todo_verificado'] is False
+    assert str(empty_runtime) not in json.dumps(result)
