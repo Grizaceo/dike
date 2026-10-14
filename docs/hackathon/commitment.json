@@ -1,14 +1,13 @@
 {
   "_aviso_huella_omitida": "document_sha256 y document_bytes omitidos por defecto. La huella del escrito no viaja en este compromiso.",
   "advertencias": [
-    "Diké verifica que estas normas existan, sean citables y estén vigentes; NO verifica que fundamenten sustantivamente lo que el escrito afirma.  Esa fundamentación es juicio del abogado.",
-    "El texto menciona normas sin artículo pinpoint que el gate no verificó: no son citas verificables tal cual, pero existen y no deben darse por comprobadas."
+    "Diké verifica que estas normas existan, sean citables y estén vigentes; NO verifica que fundamenten sustantivamente lo que el escrito afirma.  Esa fundamentación es juicio del abogado."
   ],
   "alcance": "La constancia acredita identidad de la referencia, integridad del texto fuente, provenance y vigencia; no certifica la corrección de interpretaciones o paráfrasis.",
-  "as_of": "2026-10-06",
+  "as_of": "2026-10-13",
   "citas_fallidas": 2,
   "citas_verificadas": 4,
-  "fecha_constancia": "2026-10-06T06:16:52Z",
+  "fecha_constancia": "2026-10-14T00:52:00Z",
   "normas_verificadas": [
     {
       "cuerpo": "Código del Trabajo art. 161",
@@ -47,7 +46,7 @@
       "vigencia_legible": "vigente"
     }
   ],
-  "pack_hash": "ea28fa1c0f9af6c1",
+  "pack_hash": "fe458d6b9c57a8d7",
   "schema_version": "dike-constancia-commitment-v2",
   "total_citas": 6
 }

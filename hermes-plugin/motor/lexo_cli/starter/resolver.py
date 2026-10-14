@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+import os
 import re
 from dataclasses import asdict, dataclass
 from datetime import date, datetime
@@ -184,7 +185,11 @@ class StarterCorpusResolver:
             return None
         # La ruta del snapshot ES su hash: clave estable e inmutable.
         digest = self.roots[0].name[:16]
-        return Path.home() / ".dike" / "binding_cache" / f"{digest}.json"
+        # `DIKE_BINDING_CACHE_DIR` redirige el caché (la suite lo manda a un
+        # temporal; auditoría 2026-10-13: escribía 5 entradas por corrida en el
+        # del operador, igual que P10 con el caché de raíces).
+        base = os.environ.get("DIKE_BINDING_CACHE_DIR") or str(Path.home() / ".dike" / "binding_cache")
+        return Path(base) / f"{digest}.json"
 
     def _binding_desde_disco(self) -> dict | None:
         path = self._binding_cache_file()

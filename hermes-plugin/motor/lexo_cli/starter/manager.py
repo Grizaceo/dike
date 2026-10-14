@@ -167,6 +167,27 @@ class StarterManager:
             return [f"instantánea sellada con hash distinto al de STATE.json ({snapshot.name[:12]}…)"]
         return []
 
+    def _current_drift_errors(self, name: str, current_digest: str | None) -> list[str]:
+        """`current/` distinto de lo sellado en STATE.json (vacía si coinciden).
+
+        Auditoría 2026-10-13: `lawyer-pilot` tenía `current/` con la corrección
+        D2 (1.473 archivos distintos) y STATE.json apuntando a la instantánea
+        anterior; `verify` decía «verificado» porque solo comparaba la sellada
+        consigo misma. Lo que abre la búsqueda es lo sellado, así que un
+        `current/` divergente es un pack a medio migrar, no un pack verificado.
+        """
+        if current_digest is None:
+            return []
+        state_path = self.package_root(name) / "STATE.json"
+        try:
+            expected = str(json.loads(state_path.read_text(encoding="utf-8"))["snapshotHash"])
+        except Exception:  # noqa: BLE001 — ya lo reporta _sealed_snapshot_errors
+            return []
+        if current_digest != expected:
+            return [f"current/ ({current_digest[:12]}…) difiere de la instantánea sellada en STATE.json ({expected[:12]}…): "
+                    "la búsqueda abre la sellada; re-sella con `dike starter rollback <ruta-snapshot>` o reinstala"]
+        return []
+
     def _write_state(self, name: str, digest: str, snapshot: Path) -> None:
         state = {"format": "dike-installed-starter-v1", "name": name, "snapshotHash": digest, "snapshot": str(snapshot)}
         (self.package_root(name) / "STATE.json").write_text(json.dumps(state, ensure_ascii=False, indent=2, sort_keys=True), encoding="utf-8")
@@ -181,6 +202,7 @@ class StarterManager:
         # STATE.json. Verificar solo `current/` decía «verificado» con esa
         # instantánea vacía y `dike buscar` fallando para el mismo usuario.
         errors += self._sealed_snapshot_errors(name)
+        errors += self._current_drift_errors(name, digest)
         metadata = self._metadata(path) if path.is_dir() and not errors else {}
         return {
             "name": name, "path": str(path), "valid": not errors,

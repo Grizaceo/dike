@@ -562,21 +562,62 @@ _MENCION_NORMA = re.compile(
 )
 
 
-def _menciones_sin_verbatim(texto: str) -> list[str]:
+# El orden habitual en un escrito chileno: el artículo va ANTES del nombre de
+# la norma («artículo 161 del Código del Trabajo», «art. 5º de la Ley 19.799»).
+_PINPOINT_ANTES = re.compile(
+    r"\bart(?:[íi]culos?|s?\.)?\s*(?:n?[º°]\s*)?\d+\s*[º°]?(?:\s+(?:bis|ter|qu[áa]ter))?"
+    r"\s*,?\s+(?:del|de\s+la|de\s+los|de\s+las|de)\s+\Z",
+    re.IGNORECASE,
+)
+
+
+def _tramos_citados(texto: str, referencias: list[dict] | None) -> list[tuple[int, int]]:
+    """Dónde está, en el texto, cada cita que el gate SÍ extrajo.
+
+    `raw` es el tramo literal que la gramática reconoció. Que el gate haya
+    extraído una cita no dice que la haya verificado: dice que la procesó y la
+    reportó, verificada o fallida. Eso basta para que no sea un punto ciego.
+    """
+    tramos: list[tuple[int, int]] = []
+    for ref in referencias or []:
+        raw = str((ref or {}).get("raw") or "")
+        if not raw:
+            continue
+        inicio = texto.find(raw)
+        while inicio != -1:
+            tramos.append((inicio, inicio + len(raw)))
+            inicio = texto.find(raw, inicio + 1)
+    return tramos
+
+
+def _menciones_sin_verbatim(texto: str, referencias: list[dict] | None = None) -> list[str]:
     """Normas mencionadas sin pinpoint, que el gate no pudo verificar.
 
     Una mención acompañada de artículo («la Ley 21.719 en su art. 5») SÍ
     tiene pinpoint verificable, y el gate la cubrió: no se declara. La que
     aparece sola («el Código Civil») no lo tiene y queda como punto ciego.
+
+    El artículo también puede ir ANTES («artículo 161 del Código del
+    Trabajo»), que es como se cita en Chile. Esa mención solo se da por
+    cubierta si se cumplen las dos cosas: el artículo está pegado delante, y
+    la mención cae dentro de una cita que el gate extrajo (`referencias`). Con
+    una sola de las dos se sigue declarando: ante la duda, se advierte de más.
     """
+    texto = texto or ""
+    tramos = _tramos_citados(texto, referencias)
     encontradas: list[str] = []
-    for m in _MENCION_NORMA.finditer(texto or ""):
+    for m in _MENCION_NORMA.finditer(texto):
         etiqueta = (m.group(0) or "").strip()
         if not etiqueta:
             continue
+        if (
+            any(inicio <= m.start() and m.end() <= fin for inicio, fin in tramos)
+            and _PINPOINT_ANTES.search(texto[max(0, m.start() - 60): m.start()])
+        ):
+            continue
         # Solo se considera acompañada si el artículo viene INMEDIATAMENTE
         # después de la mención,permitiendo un conector corto («en su art. 5»).
-        ventana = (texto or "")[m.end(): m.end() + 24]
+        ventana = texto[m.end(): m.end() + 24]
         if re.match(
             r"\s*(?:,?\s*(?:en\s+su\s+|en\s+el\s+|,)?)\s*(?:art(?:[íi]culos?|\.)?\s*)?"
             r"(?:n?[º°]\s*)?n?[º°]?\s*\d+",
@@ -622,7 +663,7 @@ def citation_disclosure(check: dict, texto: str = "") -> dict:
             "No se acreditó ninguna cita en este resultado: no hay certificado de "
             "que la norma exista."
         )
-    no_verificadas = _menciones_sin_verbatim(texto)
+    no_verificadas = _menciones_sin_verbatim(texto, check.get("references"))
     if no_verificadas:
         advertencias.append(
             "El texto menciona normas sin artículo pinpoint que el gate no "

@@ -89,7 +89,7 @@ pip install ./packages/dike-id/python
 pip install -e ".[test]"
 
 mkdir -p ~/.lexo && printf 'starter:\n  user: demo\n' > ~/.lexo/config.yaml
-tar -xzf corpus/chile-base-ea28fa1c0f9af6c1.tar.gz -C /tmp
+tar -xzf corpus/chile-base-fe458d6b9c57a8d7.tar.gz -C /tmp
 dike starter --user demo install /tmp/chile-base --name chile-base
 
 dike constancia my-brief.md                    # exit 0: all verified; 1: some were not
@@ -109,7 +109,7 @@ Briefs in `.docx` or `.pdf` need the optional extra: `pip install -e ".[document
 
 ## The corpus
 
-`corpus/chile-base-ea28fa1c0f9af6c1.tar.gz` is a snapshot of 25 statutes
+`corpus/chile-base-fe458d6b9c57a8d7.tar.gz` is a snapshot of 25 statutes
 (8,544 articles) taken from Ley Chile, the public service of the Biblioteca
 del Congreso Nacional de Chile. See `corpus/README.md` for its provenance,
 the terms it declares, and its known limits. It is a dated copy, not the

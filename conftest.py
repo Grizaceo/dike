@@ -43,6 +43,13 @@ _ANTES: dict[str, dict[str, int] | None] = {}
 # P10: el caché de raíces verificadas del operador (`~/.dike/roots_cache`).
 _ROOTS_CACHE = _DIKE / "roots_cache"
 _ROOTS_ANTES: set[str] = set()
+# Auditoría 2026-10-13: la suite también dejaba workspaces nuevos en
+# `~/.dike/users` (un `test-user` por corrida, vía el MCP por stdio) y
+# entradas en `~/.dike/binding_cache`. Misma guardia: baseline y comparación.
+_USERS = _DIKE / "users"
+_USERS_ANTES: set[str] = set()
+_BINDING_CACHE = _DIKE / "binding_cache"
+_BINDING_ANTES: set[str] = set()
 
 
 def _medida(db: Path) -> dict[str, int] | None:
@@ -87,6 +94,12 @@ def pytest_configure(config: pytest.Config) -> None:
         os.environ["DIKE_ROOTS_CACHE_DIR"] = tempfile.mkdtemp(prefix="dike-suite-roots-")
     if _ROOTS_CACHE.is_dir():
         _ROOTS_ANTES.update(p.name for p in _ROOTS_CACHE.glob("*.json"))
+    if not os.environ.get("DIKE_BINDING_CACHE_DIR"):
+        os.environ["DIKE_BINDING_CACHE_DIR"] = tempfile.mkdtemp(prefix="dike-suite-binding-")
+    if _BINDING_CACHE.is_dir():
+        _BINDING_ANTES.update(p.name for p in _BINDING_CACHE.glob("*.json"))
+    if _USERS.is_dir():
+        _USERS_ANTES.update(p.name for p in _USERS.iterdir() if p.is_dir())
     for db in _journals_reales():
         _ANTES[str(db)] = _medida(db)
 
@@ -132,4 +145,20 @@ def _guardia_journal_real():
     assert not nuevos, (
         f"P10: la suite escribió {len(nuevos)} entrada(s) en el caché de raíces real "
         f"({_ROOTS_CACHE}): {nuevos[:5]}. Debe usar DIKE_ROOTS_CACHE_DIR."
+    )
+    nuevos_binding = sorted(
+        p.name for p in (_BINDING_CACHE.glob("*.json") if _BINDING_CACHE.is_dir() else [])
+        if p.name not in _BINDING_ANTES
+    )
+    assert not nuevos_binding, (
+        f"la suite escribió {len(nuevos_binding)} entrada(s) en el caché de binding real "
+        f"({_BINDING_CACHE}): {nuevos_binding[:5]}. Debe usar DIKE_BINDING_CACHE_DIR."
+    )
+    nuevos_users = sorted(
+        p.name for p in (_USERS.iterdir() if _USERS.is_dir() else []) if p.is_dir() and p.name not in _USERS_ANTES
+    )
+    assert not nuevos_users, (
+        f"la suite creó {len(nuevos_users)} workspace(s) en {_USERS}: {nuevos_users}. "
+        "Un subproceso (MCP por stdio, CLI) debe heredar DIKE_USERS_ROOT; no se borra: "
+        "esta marca deja constancia para su revisión."
     )

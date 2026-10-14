@@ -57,7 +57,7 @@ def _green_payload():
         ],
         "meta": {
             "total_citas": 1, "citas_verificadas": 1, "citas_fallidas": 0,
-            "pack_hash": "ea28fa1c0f9af6c1",
+            "pack_hash": "fe458d6b9c57a8d7",
             "as_of": _today_iso(),
             "fecha_constancia": _now_iso(),
             "documento": "/home/abogado/proyectos/dike/docs/escrito.md",

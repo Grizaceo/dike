@@ -1,14 +1,14 @@
 # Corpus: `chile-base`
 
-`chile-base-ea28fa1c0f9af6c1.tar.gz` is the corpus Diké verifies citations
+`chile-base-fe458d6b9c57a8d7.tar.gz` is the corpus Diké verifies citations
 against in this repository: 25 Chilean statutes, 8,544 articles, each with its
 text hash, its source URL and its in-force window.
 
 | | |
 |---|---|
-| `pack_hash` | `ea28fa1c0f9af6c1` — the first 16 hex digits of the SHA-256 of the unpacked tree. Every commitment carries it |
+| `pack_hash` | `fe458d6b9c57a8d7` — the first 16 hex digits of the SHA-256 of the unpacked tree. Every commitment carries it |
 | Source | Ley Chile, Biblioteca del Congreso Nacional de Chile (`https://nuevo.leychile.cl/servicios/Navegar/get_norma_json`), one statute per request |
-| Retrieved | 2026-08-18 (dataset version 2026-08-16), per the package's `MANIFEST.json` |
+| Retrieved | 2026-08-18 (dataset version 2026-08-16), per the package's `MANIFEST.json`. In-force windows corrected on 2026-09-27 (BCN's inclusive end date → half-open `to`, 196 windows) and DL 3.500 / Código de Aguas updated to their current versions (`BUILD_REPORT.json`, `actualizacionesVersion`); this is snapshot `d31d3dc0…` of the lawyer's workspace |
 | Statutes | The 25 Ley Chile codes listed in `pack.json` (`includedLeychileCodes`); 207436 is the Código del Trabajo |
 | Left out | 464 articles the builder excluded, counted in `BUILD_REPORT.json` |
 | Checksum | `SHA256SUMS`, checked by the `Dockerfile` before installing |
@@ -16,7 +16,7 @@ text hash, its source URL and its in-force window.
 ## Install
 
 ```bash
-tar -xzf chile-base-ea28fa1c0f9af6c1.tar.gz -C /tmp
+tar -xzf chile-base-fe458d6b9c57a8d7.tar.gz -C /tmp
 dike starter --user demo install /tmp/chile-base --name chile-base
 ```
 

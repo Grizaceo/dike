@@ -29,7 +29,7 @@ def real(tmp_path_factory):
 def test_demo_real_cold_and_warm(real):
     for result in real[2:]:
         assert 'error' not in result, result
-        assert result['meta']['pack_hash'] == 'ea28fa1c0f9af6c1'
+        assert result['meta']['pack_hash'] == 'fe458d6b9c57a8d7'
         assert result['meta']['total_citas'] == 6
         assert result['meta']['citas_verificadas'] == 4
         assert result['meta']['citas_fallidas'] == 2

@@ -61,7 +61,7 @@ def _green_payload():
         ],
         "meta": {
             "total_citas": 1, "citas_verificadas": 1, "citas_fallidas": 0,
-            "pack_hash": "ea28fa1c0f9af6c1",
+            "pack_hash": "fe458d6b9c57a8d7",
             "as_of": _today_iso(),
             "fecha_constancia": _now_iso(),
             "documento": "escrito.md", "origen": None,
@@ -152,7 +152,7 @@ def test_green_pin_pack_hash_preserved(native, monkeypatch):
     )
     result = json.loads(native.verificar_citas({'texto': 'art. 161'}))
     assert 'error' not in result
-    assert result['meta']['pack_hash'] == 'ea28fa1c0f9af6c1'
+    assert result['meta']['pack_hash'] == 'fe458d6b9c57a8d7'
 
 
 def test_unknown_verdict_rejected(native, monkeypatch):

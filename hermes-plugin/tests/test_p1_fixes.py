@@ -60,7 +60,7 @@ def _sin_citas_payload():
             "origen": None,
             "as_of": date.today().isoformat(),
             "fecha_constancia": datetime.now(timezone.utc).replace(microsecond=0).isoformat().replace("+00:00", "Z"),
-            "pack_hash": "ea28fa1c0f9af6c1",
+            "pack_hash": "fe458d6b9c57a8d7",
         },
     }
 
@@ -158,7 +158,7 @@ def _verified_with_unverified_mention():
         },
         "meta": {
             "total_citas": 1, "citas_verificadas": 1, "citas_fallidas": 0,
-            "pack_hash": "ea28fa1c0f9af6c1",
+            "pack_hash": "fe458d6b9c57a8d7",
             "as_of": date.today().isoformat(),
             "fecha_constancia": datetime.now(timezone.utc).replace(microsecond=0).isoformat().replace("+00:00", "Z"),
             "documento": "escrito.md", "origen": None,

@@ -37,6 +37,9 @@ from pathlib import Path
 _RAIZ = Path(__file__).resolve().parent
 _MOTOR = _RAIZ / "motor"
 _CORPUS = _RAIZ / "corpus"
+# pack_hash (16 hex del SHA-256 del árbol) del corpus vendorizado en corpus/: snapshot
+# chile-base d31d3dc0… (D2 + P12/P13), el mismo que firma el kit del hackathon (firma n.º 2).
+PACK_HASH = 'fe458d6b9c57a8d7'
 _USUARIO = "hermes"
 _NOMBRE_CORPUS = "chile-base"
 _LIMITE_TEXTO = 400_000
@@ -231,7 +234,7 @@ def _validar_constancia(c, code, *, as_of=None):
     expected = as_of or date.today().isoformat()
     if meta['as_of'] != expected:
         raise ValueError('as_of mismatch')
-    expected_pack = 'sin-corpus' if verdict == 'SIN_CORPUS' else 'ea28fa1c0f9af6c1'
+    expected_pack = 'sin-corpus' if verdict == 'SIN_CORPUS' else PACK_HASH
     if meta.get('pack_hash') != expected_pack:
         raise ValueError('unexpected corpus pack_hash')
     abstention = verdict in ('SIN_CITAS', 'SIN_CORPUS')

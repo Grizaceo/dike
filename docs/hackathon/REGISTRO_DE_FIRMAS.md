@@ -26,7 +26,30 @@ kit lleva una firma que no figura aquí como vigente.
 
 | N.º | Fecha (UTC) | `commitment_hash` | Qué se firmó | Estado |
 |---|---|---|---|---|
-| 1 | 2026-10-06T06:16:52Z | `a981036de88ffc2dfec95ecf33421fa08adbda334975cf04477ff5ef450b1b8f` | Commitment del escrito sintético `escrito_demo.md`: 6 citas, 4 verificadas y 2 que Diké no pudo verificar. Corpus `ea28fa1c0f9af6c1` | **Vigente.** Es el ejemplo del kit |
+| 1 | 2026-10-06T06:16:52Z | `a981036de88ffc2dfec95ecf33421fa08adbda334975cf04477ff5ef450b1b8f` | Commitment del escrito sintético `escrito_demo.md`: 6 citas, 4 verificadas y 2 que Diké no pudo verificar. Corpus `ea28fa1c0f9af6c1` | **Reemplazada** por la n.º 2 (E2/H6: advertía de más; y el corpus sellado cambió). Sigue verificando contra su propio commitment |
+| 2 | 2026-10-14T00:52:00Z | `65f3ebe1da74d81ca59566f2ffe4b942ed6db1c2d2ecb891774da3f21b74522a` | El mismo escrito (SHA-256 `4a8ce708…`, sin cambios): 6 citas, 4 verificadas y 2 que Diké no pudo verificar; una sola advertencia (la de alcance). Corpus `fe458d6b9c57a8d7` (snapshot `d31d3dc0…`, D2 + P12/P13). Código `13ac6370` | **Vigente.** Es el ejemplo del kit |
+
+### Detalle de la firma n.º 2
+
+- **Quién la ejecutó.** Una sesión de Devin, por instrucción de Cristóbal en la
+  conversación del 2026-10-13 (re-auditoría integral, plan de acción). Igual
+  que en la n.º 1, la sesión pasó al CLI la ruta de la llave y nunca leyó ni
+  imprimió su contenido.
+- **Por qué.** Cierra E2/H6: el parche `h6_citation_check.patch` quedó aplicado
+  (commit `13ac6370`), y con él el mismo escrito ya no dispara la advertencia
+  «normas sin artículo pinpoint». Además, ese día los packs se re-sellaron al
+  snapshot `d31d3dc0…` (D2 + P12/P13), así que `pack_hash` cambió.
+- **Comando.** `dike constancia docs/hackathon/escrito_demo.md --json --emit-commitment DIR --sign`,
+  con `LEXO_CONTENT_SIGNING_KEY_PATH` apuntando a la llave real y `DIR` una
+  carpeta temporal. Salió 1, lo esperado.
+- **Comprobaciones.** Ensayo previo con llave sintética; `key_id` de la llave
+  real (derivado con OpenSSL) igual al publicado; clave pública emitida idéntica
+  byte a byte a `content-signing-key.pub`; los dos caminos de `KEYS.md` con
+  salida 0; control negativo (`citas_fallidas` 2→0) rechazado con salida 1.
+- **Lo que sigue sin resolver.** El escrito no ha sido revisado por un abogado
+  (mismo estado que en la n.º 1). Si esa revisión lo cambia, se firma de nuevo.
+
+Evidencia: `docs/reviews/evidencia/reauditoria_20261013/firma2_real.txt`.
 
 ### Detalle de la firma n.º 1
 
@@ -121,3 +144,6 @@ Evidencia: `docs/reviews/evidencia/reauditoria_opus55_20261005/q9b_clave_publica
   (firma n.º 2), en lo posible junto con su revisión del escrito como abogado,
   para firmar una sola vez más. Hasta entonces la firma n.º 1 sigue vigente y
   este error queda anotado aquí.
+- **Cerrado el 2026-10-14.** Cristóbal autorizó aplicar el arreglo y firmar sin
+  esperar la revisión del escrito (que sigue pendiente). Firma n.º 2 vigente;
+  la n.º 1 pasó a «Reemplazada».
