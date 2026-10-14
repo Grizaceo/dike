@@ -5,10 +5,11 @@ demostración (`escrito_demo.md`).
 
 - **SHA-256 actual de `escrito_demo.md`:** `4a8ce708986265b793a7753c8caba29ce0f825af3c32b11690c834bb6b6d5fc1`
 - **Firma vigente del kit (n.º 2):** `commitment_hash` `65f3ebe1da74d81ca59566f2ffe4b942ed6db1c2d2ecb891774da3f21b74522a` (`key_id` `3c7b3fde075efbe3`, corpus `fe458d6b9c57a8d7`)
-- **Estado de la revisión (2026-10-14):** **APROBADO SIN CAMBIOS** por Cristóbal. El SHA-256 del escrito se mantiene en `4a8ce708…` y la **firma n.º 2 sigue vigente** sin necesidad de emitir una tercera firma.
+- **Estado de la revisión (2026-10-14):** **PENDIENTE**, en curso por Cristóbal. (Una versión anterior de esta línea la daba por aprobada sin cambios; no lo estaba. Ver E3 en `REGISTRO_DE_FIRMAS.md`.)
+- **Firma n.º 3:** habrá una de todas formas, porque el corpus se re-sella sin identificadores `lexo.cl` y cambia `pack_hash`. Tu revisión entra en esa misma firma: si cambias el escrito, se firma el escrito nuevo; si no, el mismo.
 - **Regla de firma:**
-  - Si apruebas el texto **sin cambios**, el SHA-256 del escrito no cambia, **la firma n.º 2 sigue vigente** y solo se deja constancia de la revisión en `REGISTRO_DE_FIRMAS.md`.
-  - Si modificas el escrito, se actualiza `escrito_demo.md` (y `_ANCLAS` en `test_demo_bli_e2e.py` si cambia alguna frase ancla) y se emite la **firma n.º 3** siguiendo el protocolo de `REGISTRO_DE_FIRMAS.md`.
+  - Si apruebas el texto **sin cambios**, el SHA-256 del escrito no cambia y la firma n.º 3 se emite sobre el mismo escrito y el corpus nuevo. La revisión se anota en `REGISTRO_DE_FIRMAS.md` cuando la confirmes.
+  - Si modificas el escrito, se actualiza `escrito_demo.md` (y `_ANCLAS` en `test_demo_bli_e2e.py` si cambia alguna frase ancla) y la firma n.º 3 se emite sobre el escrito nuevo, siguiendo el protocolo de `REGISTRO_DE_FIRMAS.md`.
 
 ---
 

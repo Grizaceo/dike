@@ -1,3 +1,10 @@
+<p align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="docs/hackathon/marca/dike-logotipo-oscuro.png">
+    <img alt="Diké — verify less, prove it" src="docs/hackathon/marca/dike-logotipo-claro.png" width="440">
+  </picture>
+</p>
+
 # Diké
 
 Diké checks every statutory citation in a Chilean legal brief against a local,

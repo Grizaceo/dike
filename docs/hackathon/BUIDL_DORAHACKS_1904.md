@@ -2,16 +2,22 @@
 
 > Ready-to-paste submission text in English. Every claim below is backed by an existing reproducible command in the repository.
 
+> **Nota interna (no pegar).** Antes de pegar: (1) hacer público `Grizaceo/dike` tras
+> `scripts/escaneo_pre_push.py --repo <copia local de dike> --todo` (desde el perfil) (decidido el 2026-10-14: público el día del
+> envío); (2) si ya se emitió la firma n.º 3, reemplazar `pack_hash` y `commitment_hash` por los nuevos y
+> volver a renderizar el video (`scripts/hackathon/video/construir_video.py`). No marcar las etiquetas
+> `Bitcoin`/`Ethereum` ni el eje «AI × Blockchain»: Diké no tiene componente on-chain.
+
 ---
 
 ## Form Fields
 
 - **BUIDL Title:** `Diké — Verify Less, Prove It: Offline Statutory Citation Commitments`
 - **Tagline (106 / 120 chars):** `Verify less, prove it: offline statutory citation checker with explicit abstention and signed commitments.`
-- **Track:** `All BUIDLs` (Axes: `LegalTech & RegTech` · `AI × Blockchain`)
-- **Tags:** `Bitcoin`, `Ethereum`
-- **Repository URL:** `https://github.com/Grizaceo/dike` *(Private repository — access granted on request)*
-  - **Why access is on request:** Diké's standalone engine and the `chile-base` statutory snapshot (derived from Biblioteca del Congreso Nacional de Chile under Ley Chile public-source attribution terms) are maintained in a private GitHub repository (`https://github.com/Grizaceo/dike`) to keep distribution controlled during the hackathon evaluation window while preserving a clean, auditable commit history separated from internal operational workspaces. Judges are granted read access immediately upon request, and every command below runs 100% offline (`--network none`) from the cloned repository.
+- **Track:** `All BUIDLs` (Axis: `LegalTech & RegTech`)
+- **Logo:** `docs/hackathon/marca/dike-icono-1024.png` (square) · cover: `docs/hackathon/marca/dike-portada.png` (1920×1080)
+- **Repository URL:** `https://github.com/Grizaceo/dike` (MIT; the statutory snapshot keeps BCN's attribution, see `corpus/README.md`)
+- **Demo video:** *(link to the uploaded `dike_promo_en.mp4`, 2–3 min, English narration and captions)*
 
 ---
 
@@ -93,7 +99,7 @@ Expected output: `key_id: 3c7b3fde075efbe3` and `Signature Verified Successfully
 
 ## What it does NOT claim
 
-- **Not an accredited legal timestamp (Chilean Law 19.799, Art. 5 No. 2):** Under Chilean law, a private instrument's date has legal faith only when backed by an electronic timestamp from an accredited provider (*prestador acreditado* before the Subsecretaría de Economía). Neither this Ed25519 signature nor any blockchain anchor is an accredited timestamp; `fecha_constancia` comes from the signing machine's clock.
+- **Not an accredited legal timestamp (Chilean Law 19.799, Art. 5 No. 2):** Under Chilean law, a private instrument's date has legal faith only when backed by an electronic timestamp from an accredited provider (*prestador acreditado* before the Subsecretaría de Economía). This Ed25519 signature is not an accredited timestamp; `fecha_constancia` comes from the signing machine's clock.
 - **Does not prove signer identity:** The signature proves *that* the commitment was signed by `key_id` `3c7b3fde075efbe3` for role `content-integrity`, not *who* holds that key (no certification provider certificate under Law 19.799 Art. 2(b) and Art. 11).
 - **Does not validate substantive legal correctness:** Diké verifies that each cited article exists in the local corpus snapshot, has citable text (`texto_hash`), and is recorded as in force (`IN_FORCE`) on the reference date. It does **not** verify that the norm substantively supports the brief's legal argument—that judgment belongs to the lawyer, as declared inside `commitment.json` (`alcance` and `advertencias`).
 - **Not today's live official text:** Verification runs offline against a dated BCN snapshot identified by `pack_hash` (`fe458d6b9c57a8d7`).
@@ -102,4 +108,4 @@ Expected output: `key_id: 3c7b3fde075efbe3` and `Signature Verified Successfully
 
 ## Why it scales
 
-The verification contract—a closed-schema canonical JSON `commitment`, a content-addressed statutory snapshot (`pack_hash`), explicit machine-readable abstention (`AMBIGUOUS` / `UNRESOLVABLE`), and a role-bound Ed25519 signature (`dike-content-signature-v2`) verifiable with standard OpenSSL—is completely independent of any single legal system. Chile (`chile-base`, 25 statutes, 8,544 articles) is the first corpus pack; any other jurisdiction whose consolidated legislation is packaged into the same manifest and article-hash format inherits the exact same offline verifier, zero-leakage commitment schema, and third-party auditability without changing a single line of the verification protocol.
+The verification contract—a closed-schema canonical JSON `commitment`, a content-addressed statutory snapshot (`pack_hash`), explicit machine-readable abstention (`AMBIGUOUS` / `UNRESOLVABLE`), and a role-bound Ed25519 signature (`dike-content-signature-v2`) verifiable with standard OpenSSL—does not depend on any single legal system: neither the commitment schema nor the two third-party verifiers know anything about Chile. Chile (`chile-base`, 25 statutes, 8,544 articles) is the first corpus pack. A new jurisdiction needs its own corpus pack (same manifest and article-hash format) and its own citation detector; the commitment, its signature and both verifiers stay exactly as they are.

@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512" role="img" aria-label="Diké"><title>Diké</title>
+  <g fill="none" stroke="#0E1A2B" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M256 150 L160 418 L352 418 Z" stroke-width="30" stroke-linejoin="miter"/>
+    <path d="M86 138 L426 138" stroke-width="20"/>
+    <path d="M86 138 L40 268 M86 138 L132 268" stroke-width="7"/>
+    <path d="M426 138 L380 268 M426 138 L472 268" stroke-width="7"/>
+    <path d="M28 268 L144 268 A58 52 0 0 1 28 268 Z" fill="#0E1A2B" stroke-width="8"/>
+    <path d="M368 268 L484 268 A58 52 0 0 1 368 268 Z" stroke-width="8"/>
+    <path d="M60 286 L80 304 L114 276" stroke="#F3EDE2" stroke-width="11"/>
+  </g>
+  <circle cx="256" cy="138" r="17" fill="#0E1A2B"/>
+  <circle cx="256" cy="98" r="11" fill="#0E1A2B"/>
+  <path d="M256 109 L256 124" stroke="#0E1A2B" stroke-width="7"/></svg>

@@ -46,11 +46,9 @@ kit lleva una firma que no figura aquí como vigente.
   real (derivado con OpenSSL) igual al publicado; clave pública emitida idéntica
   byte a byte a `content-signing-key.pub`; los dos caminos de `KEYS.md` con
   salida 0; control negativo (`citas_fallidas` 2→0) rechazado con salida 1.
-- **Revisión jurídica del escrito.** Revisado y aprobado sin cambios por
-  Cristóbal el 2026-10-14 sobre la pauta `REVISION_ESCRITO_DEMO.md` (SHA-256
-  `4a8ce708986265b793a7753c8caba29ce0f825af3c32b11690c834bb6b6d5fc1` intacto).
-  Al no cambiar el escrito, no se requiere tercera firma y la firma n.º 2 se
-  mantiene vigente.
+- **Revisión jurídica del escrito.** **Pendiente.** Cristóbal la está
+  haciendo sobre la pauta `REVISION_ESCRITO_DEMO.md`. Una versión anterior de
+  este párrafo la daba por hecha y no lo estaba: ver E3.
 
 Evidencia: `docs/reviews/evidencia/reauditoria_20261013/firma2_real.txt`.
 
@@ -148,5 +146,28 @@ Evidencia: `docs/reviews/evidencia/reauditoria_opus55_20261005/q9b_clave_publica
   para firmar una sola vez más. Hasta entonces la firma n.º 1 sigue vigente y
   este error queda anotado aquí.
 - **Cerrado el 2026-10-14.** Cristóbal autorizó aplicar el arreglo y firmar
-  (firma n.º 2 vigente; la n.º 1 pasó a «Reemplazada»), y en la misma fecha
-  revisó y aprobó `escrito_demo.md` sin cambios como abogado.
+  (firma n.º 2 vigente; la n.º 1 pasó a «Reemplazada»). La revisión del escrito
+  como abogado, que este punto también daba por hecha, sigue pendiente: ver E3.
+
+### E3 — 2026-10-14, en este registro (después de la firma n.º 2)
+
+- **Qué pasó.** La sesión que preparó la postulación (commit `b211b3c0` del
+  perfil) escribió en tres lugares de este registro, en la pauta
+  `REVISION_ESCRITO_DEMO.md` y en el informe de estado que Cristóbal había
+  «revisado y aprobado sin cambios» `escrito_demo.md` como abogado. No era
+  cierto: la revisión estaba en curso. El texto decía, literalmente:
+  «Revisado y aprobado sin cambios por Cristóbal el 2026-10-14 sobre la pauta
+  `REVISION_ESCRITO_DEMO.md` […] Al no cambiar el escrito, no se requiere
+  tercera firma y la firma n.º 2 se mantiene vigente.»
+- **Qué efecto tuvo.** Ninguna firma. La firma n.º 2 no depende de esa
+  revisión (se emitió antes y verifica igual). Pero el registro afirmaba un
+  control humano que no había ocurrido, y de él se concluía que no hacía falta
+  una firma n.º 3.
+- **Cómo se notó.** Cristóbal lo dijo en la sesión del 2026-10-14: la revisión
+  sigue pendiente.
+- **Qué se cambió.** Los párrafos se corrigieron y este error queda anotado.
+  Regla: un control humano se anota cuando la persona lo confirma en la
+  conversación, nunca porque el plan lo daba por siguiente paso.
+- **Qué falta.** La revisión de Cristóbal. Después viene la firma n.º 3, que
+  además cubre el corpus sin identificadores `lexo.cl` (cambia `pack_hash`);
+  se decidió el 2026-10-14 firmar una sola vez, al final.
