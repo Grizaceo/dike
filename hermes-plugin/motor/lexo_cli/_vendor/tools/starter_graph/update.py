@@ -6,6 +6,7 @@ from typing import Any
 
 from .manifest import create_manifest, verify_manifest
 from .utils import canonical_json_bytes, distributable_files, read_json, sha256_bytes, sha256_file, write_canonical_json
+from .iris import iri
 
 NODE_DIRS = ("normas", "articulos", "edges", "vigencia", "provenance")
 
@@ -91,7 +92,7 @@ def create_update(base_dir: str | Path, target_dir: str | Path, patch_path: str 
             if operations:
                 nodes.append({"@id": node_id, "relativePath": old_rel, "operations": operations})
     document = {
-        "@id": f"https://lexo.cl/updates/{snapshot_hash(base)[:16]}-{snapshot_hash(target)[:16]}",
+        "@id": iri(f"updates/{snapshot_hash(base)[:16]}-{snapshot_hash(target)[:16]}"),
         "baseSnapshotHash": snapshot_hash(base),
         "format": "lexo-jsonpatch-by-id-v1",
         "nodes": nodes,

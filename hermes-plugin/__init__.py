@@ -39,7 +39,7 @@ _MOTOR = _RAIZ / "motor"
 _CORPUS = _RAIZ / "corpus"
 # pack_hash (16 hex del SHA-256 del árbol) del corpus vendorizado en corpus/: snapshot
 # chile-base d31d3dc0… (D2 + P12/P13), el mismo que firma el kit del hackathon (firma n.º 2).
-PACK_HASH = 'fe458d6b9c57a8d7'
+PACK_HASH = 'af1422d66d1e6eee'
 _USUARIO = "hermes"
 _NOMBRE_CORPUS = "chile-base"
 _LIMITE_TEXTO = 400_000

@@ -5,6 +5,7 @@ from pathlib import Path, PurePosixPath
 from typing import Any
 
 from .utils import canonical_json_bytes, distributable_files, read_json, sha256_bytes, sha256_file, write_canonical_json
+from .iris import iri
 
 ATTRIBUTION = "Ley Chile – Biblioteca del Congreso Nacional"
 SPARQL_ENDPOINT = "https://datos.bcn.cl/sparql"
@@ -47,7 +48,7 @@ def create_manifest(
         for path in distributable_files(root)
     ]
     core: dict[str, Any] = {
-        "@id": "https://lexo.cl/packages/starter-graph/v1/manifest",
+        "@id": iri("packages/starter-graph/v1/manifest"),
         "format": "lexo-starter-graph-manifest-v1",
         "packageVersion": package_version,
         "source": ATTRIBUTION,

@@ -7,6 +7,7 @@ from datetime import date
 from pathlib import Path
 from typing import Any
 
+from .iris import BASE, BASE_LEGADA, es_eli_propio, es_legado
 from .manifest import verify_manifest
 from .utils import canonical_json_bytes, read_json, sha256_bytes
 
@@ -82,7 +83,7 @@ def _validate_resource(node: dict[str, Any], errors: list[str]) -> None:
     node_id = node.get("@id", "<sin-id>")
     node_type = node.get("@type")
     if node_type == "LegalResource":
-        if not node_id.startswith("https://lexo.cl/eli/"):
+        if not es_eli_propio(node_id):
             errors.append(f"ID ELI propio inválido: {node_id}")
         if not str(node.get("leychileCode", "")):
             errors.append(f"Norma sin leychileCode: {node_id}")
@@ -207,7 +208,7 @@ def export_turtle(package_dir: str | Path, output_path: str | Path) -> Path:
     if errors:
         raise ValueError("No se puede exportar Turtle: " + "; ".join(errors))
     lines = [
-        "@prefix lexo: <https://lexo.cl/vocab/> .",
+        f"@prefix lexo: <{BASE}vocab/> .",
         "@prefix prov: <http://www.w3.org/ns/prov#> .",
         "@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .",
         "",
@@ -250,7 +251,28 @@ def export_turtle(package_dir: str | Path, output_path: str | Path) -> Path:
     return output
 
 
-def validate_package(package_dir: str | Path, *, export_turtle: str | Path | None = None) -> ValidationReport:
+def _iris_legados(nodes: dict[str, dict[str, Any]], edges: list[dict[str, Any]]) -> int:
+    """Cuántas referencias del grafo usan todavía la base legada (ARCH-004)."""
+    total = 0
+    for node in nodes.values():
+        total += sum(isinstance(node.get(k), str) and es_legado(node[k]) for k in ("@id", "isPartOf", "resource"))
+    for edge in edges:
+        total += sum(isinstance(edge.get(k), str) and es_legado(edge[k]) for k in ("@id", "source", "target"))
+    return total
+
+
+def validate_package(
+    package_dir: str | Path,
+    *,
+    export_turtle: str | Path | None = None,
+    legado: str = "advertir",
+) -> ValidationReport:
+    """Valida el paquete. `legado` dice qué hacer con IRI bajo `https://lexo.cl/`
+    (dominio ajeno, ARCH-004): «advertir» los acepta con una advertencia —los
+    packs sellados antes del 2026-10-14 los traen—, «rechazar» los vuelve error.
+    Lo que se construye o se publica se valida con «rechazar»."""
+    if legado not in ("advertir", "rechazar"):
+        raise ValueError(f"legado debe ser 'advertir' o 'rechazar', no {legado!r}")
     root = Path(package_dir)
     errors: list[str] = []
     warnings: list[str] = []
@@ -314,6 +336,12 @@ def validate_package(package_dir: str | Path, *, export_turtle: str | Path | Non
         _validate_temporal(node, errors)
     _validate_vigencia_coherence(nodes, errors)
 
+    legados = _iris_legados(nodes, edges)
+    if legados:
+        mensaje = (f"{legados} referencias usan la base legada {BASE_LEGADA} (dominio ajeno); "
+                   f"los packs nuevos usan {BASE}")
+        (errors if legado == "rechazar" else warnings).append(mensaje)
+
     node_ids = set(nodes)
     for edge in edges:
         edge_id = edge.get("@id", "<sin-id>")
@@ -341,8 +369,10 @@ def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description="Validar Starter Graph v1 de forma fail-closed")
     parser.add_argument("package", type=Path)
     parser.add_argument("--export-turtle", type=Path)
+    parser.add_argument("--legado", choices=("advertir", "rechazar"), default="advertir",
+                        help="qué hacer con IRI bajo la base legada (dominio ajeno, ARCH-004)")
     args = parser.parse_args(argv)
-    report = validate_package(args.package, export_turtle=args.export_turtle)
+    report = validate_package(args.package, export_turtle=args.export_turtle, legado=args.legado)
     print(json.dumps({"ok": report.ok, "errors": list(report.errors), "warnings": list(report.warnings)}, ensure_ascii=False, indent=2))
     return 0 if report.ok else 1
 

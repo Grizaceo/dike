@@ -96,7 +96,7 @@ pip install ./packages/dike-id/python
 pip install -e ".[test]"
 
 mkdir -p ~/.lexo && printf 'starter:\n  user: demo\n' > ~/.lexo/config.yaml
-tar -xzf corpus/chile-base-fe458d6b9c57a8d7.tar.gz -C /tmp
+tar -xzf corpus/chile-base-af1422d66d1e6eee.tar.gz -C /tmp
 dike starter --user demo install /tmp/chile-base --name chile-base
 
 dike constancia my-brief.md                    # exit 0: all verified; 1: some were not
@@ -116,7 +116,7 @@ Briefs in `.docx` or `.pdf` need the optional extra: `pip install -e ".[document
 
 ## The corpus
 
-`corpus/chile-base-fe458d6b9c57a8d7.tar.gz` is a snapshot of 25 statutes
+`corpus/chile-base-af1422d66d1e6eee.tar.gz` is a snapshot of 25 statutes
 (8,544 articles) taken from Ley Chile, the public service of the Biblioteca
 del Congreso Nacional de Chile. See `corpus/README.md` for its provenance,
 the terms it declares, and its known limits. It is a dated copy, not the
@@ -147,9 +147,12 @@ official text of today: the `pack_hash` in every commitment says which copy.
 - **Leftovers of the larger codebase.** Some modules still carry defaults that
   point to services this distribution does not include (a search index, an
   agent runtime). `dike constancia` does not use them.
-- **Identifiers under `lexo.cl`.** The corpus format uses `https://lexo.cl/…`
-  as identifier prefix. Those are names, not links, and that domain does not
-  belong to this project.
+- **Identifiers under `dike.invalid`.** The corpus names its own nodes
+  `https://dike.invalid/…`. `.invalid` is reserved (RFC 6761): those are names,
+  not links, and no one can own them. Corpus snapshots sealed before
+  2026-10-14 used a prefix under a domain that belongs to a third party; Diké
+  still reads them, with a warning, and the image refuses to install a corpus
+  that carries it.
 - **License.** The code, schemas, and verification scripts in this repository
   are licensed under the [MIT License](LICENSE). The statutory snapshot under
   `corpus/` (and mirrored in `hermes-plugin/corpus/`) is governed by the

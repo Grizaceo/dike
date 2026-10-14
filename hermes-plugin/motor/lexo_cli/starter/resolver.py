@@ -13,6 +13,7 @@ from threading import Lock
 from typing import Iterable
 
 from lexo_cli.gid import a_gid_runtime, motivo_no_identidad
+from lexo_cli._vendor.tools.starter_graph.iris import a_base_actual, a_base_legada
 from lexo_cli.starter.text_defects import (
     TEXT_DEFECT_STATUS,
     TextDefectCatalogError,
@@ -583,10 +584,12 @@ class StarterCorpusResolver:
             raise NormativeResolutionError("UNRESOLVABLE_GID", gid, "sin mapping explícito") from exc
 
     def resolve_eli(self, eli: str) -> ResolvedNormEvidence:
-        try:
-            return self._by_eli[eli]
-        except KeyError as exc:
-            raise NormativeResolutionError("UNRESOLVABLE_ELI", eli, "no existe en snapshot") from exc
+        # ARCH-004: el mismo IRI bajo https://dike.invalid/ o bajo la base legada
+        # https://lexo.cl/ (packs sellados antes del 2026-10-14) es el mismo nodo.
+        for candidato in (eli, a_base_actual(eli), a_base_legada(eli)):
+            if candidato in self._by_eli:
+                return self._by_eli[candidato]
+        raise NormativeResolutionError("UNRESOLVABLE_ELI", eli, "no existe en snapshot")
 
     def resolve_many(self, gids: Iterable[str]) -> list[ResolvedNormEvidence]:
         return [self.resolve(gid) for gid in gids]

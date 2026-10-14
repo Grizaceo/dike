@@ -19,13 +19,13 @@ from pathlib import Path
 from typing import Any, Iterable
 
 from .manifest import DEFAULT_CONDITIONS_VERSION, SPARQL_ENDPOINT, create_manifest
+from .iris import USER_AGENT, iri
 from .utils import read_json, sha256_bytes, slug, write_canonical_json
 
 MODULE_DIR = Path(__file__).resolve().parent
 BCN = "http://datos.bcn.cl/ontologies/bcn-norms#"
 DC = "http://purl.org/dc/elements/1.1/"
 XML_NS = "http://www.leychile.cl/esquemas"
-USER_AGENT = "Mozilla/5.0 (compatible; LexO-StarterGraph/1.0; +https://lexo.cl)"
 
 
 class SparqlClient:
@@ -274,7 +274,7 @@ def _parse_articles(record: dict[str, Any], norm_id: str) -> tuple[list[dict[str
 
 def _eli_id(record: dict[str, Any]) -> str:
     year = str(record.get("publishDate") or record.get("versionDate") or "0000")[:4]
-    return f"https://lexo.cl/eli/cl/{slug(str(record.get('type', 'norma')))}/{slug(str(record['number']))}/{year}"
+    return iri(f"eli/cl/{slug(str(record.get('type', 'norma')))}/{slug(str(record['number']))}/{year}")
 
 
 def _provenance(source: str, retrieved_at: str, dataset_version: str, activity_id: str) -> dict[str, Any]:
@@ -289,7 +289,7 @@ def _provenance(source: str, retrieved_at: str, dataset_version: str, activity_i
 
 def _edge(kind: str, source: str, target: str) -> dict[str, Any]:
     digest = sha256_bytes(f"{kind}\n{source}\n{target}".encode("utf-8"))[:24]
-    return {"@id": f"https://lexo.cl/edges/{digest}", "@type": "Edge", "source": source, "target": target, "type": kind}
+    return {"@id": iri(f"edges/{digest}"), "@type": "Edge", "source": source, "target": target, "type": kind}
 
 
 def _copy_contracts(stage: Path) -> None:
@@ -347,8 +347,8 @@ def build_package(
 
     run_seed = f"{retrieved_at}|{dataset_version}|" + ",".join(str(record["leychileCode"]) for record in records)
     run_id = sha256_bytes(run_seed.encode("utf-8"))[:20]
-    source_id = f"https://lexo.cl/prov/bcn-dataset/{dataset_version}"
-    activity_id = f"https://lexo.cl/prov/starter-build/{run_id}"
+    source_id = iri(f"prov/bcn-dataset/{dataset_version}")
+    activity_id = iri(f"prov/starter-build/{run_id}")
     write_canonical_json(stage / "provenance" / "bcn_source.json", {
         "@id": source_id, "@type": "prov:Entity", "attribution": "Ley Chile – Biblioteca del Congreso Nacional",
         "datasetVersion": dataset_version, "source": SPARQL_ENDPOINT,
@@ -422,11 +422,11 @@ def build_package(
         write_canonical_json(stage / "edges" / f"edge_{index:05d}_{edge['type'].lower()}.json", edge)
 
     write_canonical_json(stage / "pack.json", {
-        "@id": "https://lexo.cl/packages/starter-graph/v1", "format": "lexo-starter-graph-v1",
+        "@id": iri("packages/starter-graph/v1"), "format": "lexo-starter-graph-v1",
         "includedLeychileCodes": sorted(norm_by_code), "packs": specs, "version": "1.0.0",
     })
     report = {
-        "@id": f"https://lexo.cl/reports/starter-build/{run_id}", "articleCount": article_count,
+        "@id": iri(f"reports/starter-build/{run_id}"), "articleCount": article_count,
         "datasetVersion": dataset_version, "edgeCount": len(edges), "normCount": len(records),
         "omittedExternalRelationCount": omitted, "retrievedAt": retrieved_at, "source": SPARQL_ENDPOINT,
         "stopReason": "build_complete_pending_validation", "warnings": warnings,
@@ -436,14 +436,14 @@ def build_package(
     from .validate import export_turtle, validate_package
     export_turtle(stage, stage / "exports" / "graph.ttl")
     create_manifest(stage, retrieved_at=retrieved_at, dataset_version=dataset_version, conditions_version=conditions_version)
-    validation = validate_package(stage)
+    validation = validate_package(stage, legado="rechazar")
     if not validation.ok:
         (stage / "MANIFEST.json").unlink(missing_ok=True)
         raise RuntimeError("Paquete inválido; MANIFEST retirado: " + "; ".join(validation.errors))
     report["stopReason"] = "build_hash_validate_ok"
     write_canonical_json(stage / "BUILD_REPORT.json", report)
     create_manifest(stage, retrieved_at=retrieved_at, dataset_version=dataset_version, conditions_version=conditions_version)
-    final_validation = validate_package(stage)
+    final_validation = validate_package(stage, legado="rechazar")
     if not final_validation.ok:
         (stage / "MANIFEST.json").unlink(missing_ok=True)
         raise RuntimeError("Paquete inválido al cerrar: " + "; ".join(final_validation.errors))

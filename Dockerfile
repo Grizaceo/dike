@@ -21,14 +21,16 @@ COPY shared shared
 RUN pip install --no-cache-dir -q ./packages/dike-id/python \
  && pip install --no-cache-dir -q -e ".[test]"
 
-# El corpus: se comprueba su suma, se instala con el propio `dike starter`
-# (que valida el paquete entero) y se borra la copia de trabajo.
+# El corpus: se comprueba su suma, se valida en modo estricto (ningún IRI bajo
+# un dominio ajeno: ARCH-004), se instala con el propio `dike starter` (que
+# valida el paquete entero) y se borra la copia de trabajo.
 COPY --chown=dike:dike corpus /home/dike/corpus
 USER dike
 ENV PYTHONDONTWRITEBYTECODE=1
 RUN cd /home/dike/corpus \
  && sha256sum -c SHA256SUMS \
  && tar -xzf chile-base-*.tar.gz \
+ && python -m lexo_cli._vendor.tools.starter_graph.validate --legado rechazar chile-base > /dev/null \
  && mkdir -p /home/dike/.lexo \
  && printf 'starter:\n  user: demo\n' > /home/dike/.lexo/config.yaml \
  && dike starter --user demo install chile-base --name chile-base --json > /home/dike/corpus-instalado.json \

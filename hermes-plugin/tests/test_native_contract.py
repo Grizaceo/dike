@@ -30,7 +30,7 @@ def envelope():
             'problemas': ['No se resuelve la referencia'], 'citation_disclosure': {'advertencias': [], 'no_verificadas': []},
             'detalles': [{'cita_raw': 'artículo 9999', 'estado': 'FALLO', 'resolucion': 'UNRESOLVABLE'}],
             'meta': {'total_citas': 1, 'citas_verificadas': 0, 'citas_fallidas': 1,
-                     'pack_hash': 'fe458d6b9c57a8d7', 'as_of': date.today().isoformat(),
+                     'pack_hash': 'af1422d66d1e6eee', 'as_of': date.today().isoformat(),
                      'fecha_constancia': datetime.now(timezone.utc).replace(microsecond=0).isoformat().replace("+00:00", "Z")}}
 
 

@@ -1,6 +1,6 @@
 @prefix sh: <http://www.w3.org/ns/shacl#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
-@prefix lexo: <https://lexo.cl/vocab/> .
+@prefix lexo: <https://dike.invalid/vocab/> .
 @prefix prov: <http://www.w3.org/ns/prov#> .
 
 lexo:LegalResourceShape a sh:NodeShape ;
