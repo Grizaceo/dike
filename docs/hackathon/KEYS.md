@@ -1,5 +1,57 @@
 # Claves de verificación — Diké
 
+## English Summary (for Jury & Third-Party Verifiers)
+
+This folder lets anyone verify — offline and without Diké's code — that a
+signed Diké *commitment* has not been altered after signing. It contains only a
+**public** key (`content-signing-key.pub`, `key_id` `3c7b3fde075efbe3`) and no
+private keys. All CLI output, JSON field names, and the detailed specification
+below are in Spanish.
+
+- **What a commitment is:** `dike constancia` checks every statutory citation
+  in a brief against a local, hash-identified snapshot of Chilean law derived
+  from the Biblioteca del Congreso Nacional (BCN). In the included example
+  (`escrito_demo.md`, 6 citations), Diké verifies 4 citations (`citas_verificadas: 4`)
+  and refuses to certify 2 (`citas_fallidas: 2`: one ambiguous citation without
+  a statute name, one non-existent article). Only the 4 verified provisions
+  enter `commitment.json`; refused citations and brief prose stay out.
+- **What this signature proves:**
+  1. `commitment.json` was not modified after signing (canonical JSON SHA-256
+     equals `commitment_hash`).
+  2. The signature was produced with the Ed25519 key whose public key is
+     published here (`key_id` `3c7b3fde075efbe3`).
+  3. The signature is bound to the `content-integrity` role and contract
+     `dike-content-signature-v2` (signing the 64 ASCII hex characters of
+     `sha256("content-integrity:ed25519:dike-content-signature-v2:" + commitment_hash)`).
+- **What this signature does NOT prove:**
+  - *No accredited legal timestamp in Chile:* Under Chilean Law 19.799 (Art. 5
+    No. 2), a date has legal faith only when issued by an accredited timestamp
+    provider (*prestador acreditado*). This signature is not an advanced
+    electronic signature or accredited timestamp, and a blockchain anchor is
+    not one either; dates reflect the signing machine's clock.
+  - *No certified signer identity:* It proves *which key* signed, not *who*
+    holds it (no certificate from an accredited certification provider under
+    Law 19.799 Art. 2(b) and Art. 11).
+  - *No substantive legal validation:* Diké checks that each cited article
+    exists in the local corpus snapshot (`pack_hash` `fe458d6b9c57a8d7`), has
+    citable text, and is recorded as in force on the reference date. It does
+    **not** verify that the norm substantively supports the brief's argument.
+  - *Not live official law:* The corpus is a dated local BCN snapshot named by
+    `pack_hash`.
+- **Two independent verification paths (run the executable blocks in
+  *Verificar en dos minutos* below from this folder):**
+  - **Path 1 (*Camino 1: Python*):** runs `verificar_tercero.py` (uses only
+    Python stdlib + `cryptography`; imports nothing from Diké). Outputs
+    `RESULTADO: VERIFICADO` (exit `0`).
+  - **Path 2 (*Camino 2: sin Python, con jq, coreutils y OpenSSL*):** pure
+    Linux shell recipe using `jq`, GNU coreutils (`sha256sum`, `basenc`), and
+    OpenSSL 3 (`openssl pkeyutl -verify`). Outputs
+    `Signature Verified Successfully` (exit `0`).
+  - In both paths, compare the printed `key_id` against `3c7b3fde075efbe3` in
+    the *Clave de contenido* table below.
+
+---
+
 Esta carpeta permite comprobar, sin nuestro código y sin red, que un
 *commitment* de Diké no fue alterado después de firmarse. Publica una clave
 **pública**. No contiene ninguna clave privada.

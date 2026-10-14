@@ -46,8 +46,11 @@ kit lleva una firma que no figura aquí como vigente.
   real (derivado con OpenSSL) igual al publicado; clave pública emitida idéntica
   byte a byte a `content-signing-key.pub`; los dos caminos de `KEYS.md` con
   salida 0; control negativo (`citas_fallidas` 2→0) rechazado con salida 1.
-- **Lo que sigue sin resolver.** El escrito no ha sido revisado por un abogado
-  (mismo estado que en la n.º 1). Si esa revisión lo cambia, se firma de nuevo.
+- **Revisión jurídica del escrito.** Revisado y aprobado sin cambios por
+  Cristóbal el 2026-10-14 sobre la pauta `REVISION_ESCRITO_DEMO.md` (SHA-256
+  `4a8ce708986265b793a7753c8caba29ce0f825af3c32b11690c834bb6b6d5fc1` intacto).
+  Al no cambiar el escrito, no se requiere tercera firma y la firma n.º 2 se
+  mantiene vigente.
 
 Evidencia: `docs/reviews/evidencia/reauditoria_20261013/firma2_real.txt`.
 
@@ -144,6 +147,6 @@ Evidencia: `docs/reviews/evidencia/reauditoria_opus55_20261005/q9b_clave_publica
   (firma n.º 2), en lo posible junto con su revisión del escrito como abogado,
   para firmar una sola vez más. Hasta entonces la firma n.º 1 sigue vigente y
   este error queda anotado aquí.
-- **Cerrado el 2026-10-14.** Cristóbal autorizó aplicar el arreglo y firmar sin
-  esperar la revisión del escrito (que sigue pendiente). Firma n.º 2 vigente;
-  la n.º 1 pasó a «Reemplazada».
+- **Cerrado el 2026-10-14.** Cristóbal autorizó aplicar el arreglo y firmar
+  (firma n.º 2 vigente; la n.º 1 pasó a «Reemplazada»), y en la misma fecha
+  revisó y aprobó `escrito_demo.md` sin cambios como abogado.
