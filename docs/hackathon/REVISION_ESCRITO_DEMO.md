@@ -4,8 +4,8 @@ Documento preparado para revisión por abogado del escrito sintético de
 demostración (`escrito_demo.md`).
 
 - **SHA-256 actual de `escrito_demo.md`:** `4a8ce708986265b793a7753c8caba29ce0f825af3c32b11690c834bb6b6d5fc1`
-- **Firma vigente del kit (n.º 2):** `commitment_hash` `65f3ebe1da74d81ca59566f2ffe4b942ed6db1c2d2ecb891774da3f21b74522a` (`key_id` `3c7b3fde075efbe3`, corpus `fe458d6b9c57a8d7`)
-- **Estado de la revisión (2026-10-14):** **PENDIENTE**, en curso por Cristóbal. (Una versión anterior de esta línea la daba por aprobada sin cambios; no lo estaba. Ver E3 en `REGISTRO_DE_FIRMAS.md`.)
+- **Firma vigente del kit (n.º 3, 2026-10-27 UTC):** `commitment_hash` `d220a00f21b317279a95a40a643232637645d526c3a63684f90381f7b7f45c30` (`key_id` `3c7b3fde075efbe3`, corpus `af1422d66d1e6eee`). Reemplaza a la n.º 2 (`65f3ebe1…`, corpus `fe458d6b9c57a8d7`).
+- **Estado de la revisión:** **APROBADA SIN CAMBIOS** por Cristóbal el 2026-10-26, confirmado por él en la conversación («sí sin cambios»). Aprueba las 4 citas verificadas (arts. 161, 162, 163 y 168) tal como están, sin agregar en `SEGUNDO.-` la salvedad de la indemnización sustitutiva del aviso previo. Entiende que `QUINTO.-` (art. 60) y `SEXTO.-` (art. 9999) están mal a propósito. El escrito es un fragmento sintético de demostración, no una demanda apta para presentar. SHA-256 revisado: `4a8ce708…` (sin cambios). (El 2026-10-14 esta línea la daba por aprobada sin que lo estuviera: ver E3 en `REGISTRO_DE_FIRMAS.md`.)
 - **Firma n.º 3:** habrá una de todas formas, porque el corpus se re-sella sin identificadores `lexo.cl` y cambia `pack_hash`. Tu revisión entra en esa misma firma: si cambias el escrito, se firma el escrito nuevo; si no, el mismo.
 - **Regla de firma:**
   - Si apruebas el texto **sin cambios**, el SHA-256 del escrito no cambia y la firma n.º 3 se emite sobre el mismo escrito y el corpus nuevo. La revisión se anota en `REGISTRO_DE_FIRMAS.md` cuando la confirmes.

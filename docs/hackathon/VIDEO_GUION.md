@@ -21,7 +21,7 @@ asciinema rec -c "PAUSA=2 bash scripts/hackathon/demo_video.sh" /tmp/dike_demo.c
 docker run --rm --network none dike bash scripts/hackathon/demo_video.sh
 ```
 
-`scripts/hackathon/demo_video.sh` creates an isolated temporary workspace under `/tmp/dike-video-XXXXXX`, unsets any real signing key variables, runs all 5 scenes against the local `chile-base` corpus (`pack_hash` `fe458d6b9c57a8d7`), and cleans up on exit.
+`scripts/hackathon/demo_video.sh` creates an isolated temporary workspace under `/tmp/dike-video-XXXXXX`, unsets any real signing key variables, runs all 5 scenes against the local `chile-base` corpus (`pack_hash` `af1422d66d1e6eee`), and cleans up on exit.
 
 ---
 
@@ -63,7 +63,7 @@ SEXTO.- Lo anterior se refuerza con el artículo 9999 del Código del Trabajo.
 ### Scene 2 (0:25 – 1:05) — `dike constancia` & Explicit Refusal (`AMBIGUOUS` / `UNRESOLVABLE`)
 
 **Narration (EN):**
-> "We run `dike constancia` completely offline against a local, content-addressed snapshot of 25 Chilean statutes (`pack_hash` `fe458d6b9c57a8d7`). Diké verifies Articles 161, 162, 163, and 168 of the Labor Code, and exits with code 1 because it refuses to certify the other two: *artículo 60* is rejected as `AMBIGUOUS` because that article number exists in multiple codes and no statute was named; *artículo 9999 del Código del Trabajo* is rejected as `UNRESOLVABLE` because it does not exist in the corpus."
+> "We run `dike constancia` completely offline against a local, content-addressed snapshot of 25 Chilean statutes (`pack_hash` `af1422d66d1e6eee`). Diké verifies Articles 161, 162, 163, and 168 of the Labor Code, and exits with code 1 because it refuses to certify the other two: *artículo 60* is rejected as `AMBIGUOUS` because that article number exists in multiple codes and no statute was named; *artículo 9999 del Código del Trabajo* is rejected as `UNRESOLVABLE` because it does not exist in the corpus."
 
 **Exact Commands:**
 ```bash
@@ -76,7 +76,7 @@ python -m lexo_cli constancia docs/hackathon/escrito_demo.md --json | jq '{meta:
 ✕ CONSTANCIA DE VERIFICACIÓN — CON PROBLEMAS
 Documento: docs/hackathon/escrito_demo.md
 Origen: demanda laboral (demo)
-Fecha: 2026-10-14T...Z · Pack: fe458d6b9c57a8d7
+Fecha: 2026-10-14T...Z · Pack: af1422d66d1e6eee
 ...
 Resumen: 4/6 citas verificadas
 (exit code: 1 — non-zero because 2 citations could not be verified)
@@ -88,7 +88,7 @@ Resumen: 4/6 citas verificadas
     "origen": null,
     "as_of": "2026-10-13",
     "fecha_constancia": "2026-10-14T...Z",
-    "pack_hash": "fe458d6b9c57a8d7",
+    "pack_hash": "af1422d66d1e6eee",
     "total_citas": 6,
     "citas_verificadas": 4,
     "citas_fallidas": 2
@@ -130,10 +130,10 @@ cat docs/hackathon/content-signing-key.pub
     "Diké verifica que estas normas existan, sean citables y estén vigentes; NO verifica que fundamenten sustantivamente lo que el escrito afirma.  Esa fundamentación es juicio del abogado."
   ],
   "alcance": "La constancia acredita identidad de la referencia, integridad del texto fuente, provenance y vigencia; no certifica la corrección de interpretaciones o paráfrasis.",
-  "as_of": "2026-10-13",
+  "as_of": "2026-10-26",
   "citas_fallidas": 2,
   "citas_verificadas": 4,
-  "fecha_constancia": "2026-10-14T00:52:00Z",
+  "fecha_constancia": "2026-10-27T00:24:30Z",
   "normas_verificadas": [
     {
       "cuerpo": "Código del Trabajo art. 161",
@@ -146,7 +146,7 @@ cat docs/hackathon/content-signing-key.pub
     },
     "... (arts. 0162, 0163, 0168) ..."
   ],
-  "pack_hash": "fe458d6b9c57a8d7",
+  "pack_hash": "af1422d66d1e6eee",
   "schema_version": "dike-constancia-commitment-v2",
   "total_citas": 6
 }
@@ -154,11 +154,11 @@ cat docs/hackathon/content-signing-key.pub
 ```json
 {
   "algorithm": "ed25519",
-  "commitment_hash": "65f3ebe1da74d81ca59566f2ffe4b942ed6db1c2d2ecb891774da3f21b74522a",
+  "commitment_hash": "d220a00f21b317279a95a40a643232637645d526c3a63684f90381f7b7f45c30",
   "key_id": "3c7b3fde075efbe3",
   "role": "content-integrity",
   "schema_version": "dike-content-signature-v2",
-  "signature": "98b7f16f4050e412a3448207f828b3c9e3841885fc48d6f8bf35d24c50e9774a2c3eb0c0742ce89719d3cdd5fcfed1d10aa26b03e6fc76ab46adf974e0b35c01"
+  "signature": "b68935b31dce8dfb5bb30f3660dc7e9c6898fb46359cb7596fe8a8feda72d64ea15643c633c9a4b748f7fcc7fc36f5287cf7b3d2f8b6316f14799b719456210c"
 }
 ```
 
@@ -185,8 +185,8 @@ python3 verificar_tercero.py commitment.json commitment.sig.json content-signing
    => OK
 
 2. Hash canónico del commitment
-   calculado : 65f3ebe1da74d81ca59566f2ffe4b942ed6db1c2d2ecb891774da3f21b74522a
-   firmado   : 65f3ebe1da74d81ca59566f2ffe4b942ed6db1c2d2ecb891774da3f21b74522a
+   calculado : d220a00f21b317279a95a40a643232637645d526c3a63684f90381f7b7f45c30
+   firmado   : d220a00f21b317279a95a40a643232637645d526c3a63684f90381f7b7f45c30
    => OK
 
 3. Identidad de la llave (key_id = 16 hex del SHA-256 de la pubkey en bruto)

@@ -1,8 +1,8 @@
 {
   "algorithm": "ed25519",
-  "commitment_hash": "65f3ebe1da74d81ca59566f2ffe4b942ed6db1c2d2ecb891774da3f21b74522a",
+  "commitment_hash": "d220a00f21b317279a95a40a643232637645d526c3a63684f90381f7b7f45c30",
   "key_id": "3c7b3fde075efbe3",
   "role": "content-integrity",
   "schema_version": "dike-content-signature-v2",
-  "signature": "98b7f16f4050e412a3448207f828b3c9e3841885fc48d6f8bf35d24c50e9774a2c3eb0c0742ce89719d3cdd5fcfed1d10aa26b03e6fc76ab46adf974e0b35c01"
+  "signature": "b68935b31dce8dfb5bb30f3660dc7e9c6898fb46359cb7596fe8a8feda72d64ea15643c633c9a4b748f7fcc7fc36f5287cf7b3d2f8b6316f14799b719456210c"
 }

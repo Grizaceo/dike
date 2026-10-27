@@ -4,10 +4,10 @@
     "Diké verifica que estas normas existan, sean citables y estén vigentes; NO verifica que fundamenten sustantivamente lo que el escrito afirma.  Esa fundamentación es juicio del abogado."
   ],
   "alcance": "La constancia acredita identidad de la referencia, integridad del texto fuente, provenance y vigencia; no certifica la corrección de interpretaciones o paráfrasis.",
-  "as_of": "2026-10-13",
+  "as_of": "2026-10-26",
   "citas_fallidas": 2,
   "citas_verificadas": 4,
-  "fecha_constancia": "2026-10-14T00:52:00Z",
+  "fecha_constancia": "2026-10-27T00:24:30Z",
   "normas_verificadas": [
     {
       "cuerpo": "Código del Trabajo art. 161",
@@ -46,7 +46,7 @@
       "vigencia_legible": "vigente"
     }
   ],
-  "pack_hash": "fe458d6b9c57a8d7",
+  "pack_hash": "af1422d66d1e6eee",
   "schema_version": "dike-constancia-commitment-v2",
   "total_citas": 6
 }

@@ -33,7 +33,7 @@ below are in Spanish.
     holds it (no certificate from an accredited certification provider under
     Law 19.799 Art. 2(b) and Art. 11).
   - *No substantive legal validation:* Diké checks that each cited article
-    exists in the local corpus snapshot (`pack_hash` `fe458d6b9c57a8d7`), has
+    exists in the local corpus snapshot (`pack_hash` `af1422d66d1e6eee`), has
     citable text, and is recorded as in force on the reference date. It does
     **not** verify that the norm substantively supports the brief's argument.
   - *Not live official law:* The corpus is a dated local BCN snapshot named by

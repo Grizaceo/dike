@@ -27,7 +27,37 @@ kit lleva una firma que no figura aquí como vigente.
 | N.º | Fecha (UTC) | `commitment_hash` | Qué se firmó | Estado |
 |---|---|---|---|---|
 | 1 | 2026-10-06T06:16:52Z | `a981036de88ffc2dfec95ecf33421fa08adbda334975cf04477ff5ef450b1b8f` | Commitment del escrito sintético `escrito_demo.md`: 6 citas, 4 verificadas y 2 que Diké no pudo verificar. Corpus `ea28fa1c0f9af6c1` | **Reemplazada** por la n.º 2 (E2/H6: advertía de más; y el corpus sellado cambió). Sigue verificando contra su propio commitment |
-| 2 | 2026-10-14T00:52:00Z | `65f3ebe1da74d81ca59566f2ffe4b942ed6db1c2d2ecb891774da3f21b74522a` | El mismo escrito (SHA-256 `4a8ce708…`, sin cambios): 6 citas, 4 verificadas y 2 que Diké no pudo verificar; una sola advertencia (la de alcance). Corpus `fe458d6b9c57a8d7` (snapshot `d31d3dc0…`, D2 + P12/P13). Código `13ac6370` | **Vigente.** Es el ejemplo del kit |
+| 2 | 2026-10-14T00:52:00Z | `65f3ebe1da74d81ca59566f2ffe4b942ed6db1c2d2ecb891774da3f21b74522a` | El mismo escrito (SHA-256 `4a8ce708…`, sin cambios): 6 citas, 4 verificadas y 2 que Diké no pudo verificar; una sola advertencia (la de alcance). Corpus `fe458d6b9c57a8d7` (snapshot `d31d3dc0…`, D2 + P12/P13). Código `13ac6370` | **Reemplazada** por la n.º 3 (revisión de abogado del escrito demo, aprobado sin cambios; y corpus sin identificadores `lexo.cl`). Sigue verificando contra su propio commitment |
+| 3 | 2026-10-27T00:24:30Z | `d220a00f21b317279a95a40a643232637645d526c3a63684f90381f7b7f45c30` | El mismo escrito (SHA-256 `4a8ce708…`, sin cambios; revisado y aprobado por Cristóbal como abogado el 2026-10-26): 6 citas, 4 verificadas y 2 que Diké no pudo verificar; una sola advertencia (la de alcance). Corpus `af1422d66d1e6eee` (snapshot `e02a98f7…`, el `d31d3dc0…` con sus IRI en `https://dike.invalid/`, ARCH-004). Código `f31ae86e` | **Vigente.** Es el ejemplo del kit |
+
+### Detalle de la firma n.º 3
+
+- **Quién la ejecutó.** Una sesión de Devin, por instrucción de Cristóbal en la
+  conversación del 2026-10-26 («vamos con la firma n3»). Igual que en las
+  anteriores, la sesión pasó al CLI la ruta de la llave y nunca leyó ni
+  imprimió su contenido.
+- **Por qué.** Cierra los dos motivos que quedaban: la revisión de abogado del
+  escrito (hecha el 2026-10-26, sin cambios: ver E3) y el corpus sin
+  identificadores `lexo.cl` (ARCH-004). Antes de firmar se instaló en el
+  workspace `tu-nombre` el corpus migrado `chile-base-af1422d66d1e6eee.tar.gz`
+  (de la rama `limpieza-lexocl` de `~/dike`, `SHA256SUMS` OK) con
+  `dike starter install`: snapshot sellado `e02a98f7…`, verificado. El
+  snapshot anterior `d31d3dc0…` se conserva y `STATE.json` quedó respaldado en
+  `STATE.json.bak-20261026-preARCH004`.
+- **Comando.** `dike constancia docs/hackathon/escrito_demo.md --json --emit-commitment DIR --sign`
+  (vía `python -m lexo_cli`), con `LEXO_CONTENT_SIGNING_KEY_PATH` apuntando a
+  la llave real y `DIR` una carpeta temporal. Salió 1, lo esperado.
+- **Comprobaciones.** Ensayo previo con llave sintética (4 verificadas, 2
+  fallidas, 1 advertencia; respecto del commitment n.º 2 solo cambian
+  `pack_hash`, `as_of` y `fecha_constancia`); `key_id` de la llave real
+  (derivado con OpenSSL) igual al publicado; clave pública emitida idéntica
+  byte a byte a `content-signing-key.pub`; los dos caminos de `KEYS.md` con
+  salida 0 en aislamiento (`bwrap`, sin `/home` ni red); control negativo
+  (`citas_fallidas` 2→0) rechazado con salida 1 por los dos caminos.
+- **Revisión jurídica del escrito.** Hecha antes de firmar: aprobado sin
+  cambios por Cristóbal el 2026-10-26.
+
+Evidencia: `docs/reviews/evidencia/firma3_20261026/firma3_real.txt`.
 
 ### Detalle de la firma n.º 2
 
@@ -46,9 +76,10 @@ kit lleva una firma que no figura aquí como vigente.
   real (derivado con OpenSSL) igual al publicado; clave pública emitida idéntica
   byte a byte a `content-signing-key.pub`; los dos caminos de `KEYS.md` con
   salida 0; control negativo (`citas_fallidas` 2→0) rechazado con salida 1.
-- **Revisión jurídica del escrito.** **Pendiente.** Cristóbal la está
-  haciendo sobre la pauta `REVISION_ESCRITO_DEMO.md`. Una versión anterior de
-  este párrafo la daba por hecha y no lo estaba: ver E3.
+- **Revisión jurídica del escrito.** Pendiente al firmar. **Hecha el
+  2026-10-26:** Cristóbal aprobó el escrito sin cambios sobre la pauta
+  `REVISION_ESCRITO_DEMO.md`, y lo confirmó en la conversación. Una versión
+  anterior de este párrafo la daba por hecha el 14-oct y no lo estaba: ver E3.
 
 Evidencia: `docs/reviews/evidencia/reauditoria_20261013/firma2_real.txt`.
 
@@ -171,3 +202,9 @@ Evidencia: `docs/reviews/evidencia/reauditoria_opus55_20261005/q9b_clave_publica
 - **Qué falta.** La revisión de Cristóbal. Después viene la firma n.º 3, que
   además cubre el corpus sin identificadores `lexo.cl` (cambia `pack_hash`);
   se decidió el 2026-10-14 firmar una sola vez, al final.
+- **Revisión hecha el 2026-10-26.** Cristóbal confirmó en la conversación que
+  revisó `escrito_demo.md` y lo aprueba **sin cambios** (SHA-256 `4a8ce708…`).
+  Aprueba las 4 citas verificadas tal como están y entiende que las 2 citas
+  rechazadas están mal a propósito. Falta la firma n.º 3, sobre el mismo
+  escrito y el corpus sin `lexo.cl`, que se emite cuando él la pida.
+- **Cerrado el 2026-10-26.** Firma n.º 3 emitida y vigente (`d220a00f…`).
