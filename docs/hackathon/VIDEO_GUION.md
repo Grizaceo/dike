@@ -76,7 +76,7 @@ python -m lexo_cli constancia docs/hackathon/escrito_demo.md --json | jq '{meta:
 ✕ CONSTANCIA DE VERIFICACIÓN — CON PROBLEMAS
 Documento: docs/hackathon/escrito_demo.md
 Origen: demanda laboral (demo)
-Fecha: 2026-10-14T...Z · Pack: af1422d66d1e6eee
+Fecha: 2026-10-27T...Z · Pack: af1422d66d1e6eee
 ...
 Resumen: 4/6 citas verificadas
 (exit code: 1 — non-zero because 2 citations could not be verified)
@@ -86,8 +86,8 @@ Resumen: 4/6 citas verificadas
   "meta": {
     "documento": "docs/hackathon/escrito_demo.md",
     "origen": null,
-    "as_of": "2026-10-13",
-    "fecha_constancia": "2026-10-14T...Z",
+    "as_of": "2026-10-26",
+    "fecha_constancia": "2026-10-27T...Z",
     "pack_hash": "af1422d66d1e6eee",
     "total_citas": 6,
     "citas_verificadas": 4,
