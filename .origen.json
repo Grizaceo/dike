@@ -1,7 +1,7 @@
 {
  "archivos": {
   "conftest.py": "9557ed45a565e002a731ecd2d440755e7de64717ce603320e1b843211e9a9425",
-  "docs/hackathon/BUIDL_DORAHACKS_1904.md": "6fc893d555e70e35df1d46d2b84a93db757a64249259bce6827813603a8181b8",
+  "docs/hackathon/BUIDL_DORAHACKS_1904.md": "89e554d800fc76ab4572c25bd203714514c21ab3a413cc34037f62fb9e1122ec",
   "docs/hackathon/KEYS.md": "6c384f1dbf5a27975c70aa4aff2b972ea15a3549b67b7a7bfeca139510ce0eaa",
   "docs/hackathon/REGISTRO_DE_FIRMAS.md": "dcec3e72f44dae3ae5e6b037c082b1af5dd27fccdb080684d7389de0d8eb1a63",
   "docs/hackathon/REVISION_ESCRITO_DEMO.md": "f3904e77e849e9d00fca5a8bf07f36466b773f0a3287a3df459e1966d5c4e608",
@@ -124,6 +124,6 @@
   "shared/schemas/normative_interaction_frame.v1.json": "752529e199fddeac89ce87b068f0b95099a7476f05da84d8a2c4bb092480bd7a",
   "shared/schemas/validation_contracts.py": "207ba3f288810254dc1c64e656aa1184b90b8c282aabff12c00c2f764a947486"
  },
- "commit_de_origen": "50e257d4",
+ "commit_de_origen": "3ca58cd1",
  "nota": "Lo que este proyecto recibió de su repositorio de origen. Lo escribe la exportación; no editar a mano."
 }
