@@ -105,7 +105,7 @@ Si decides modificar el texto de `escrito_demo.md`, el procedimiento obligatorio
 
 1. Actualizar `escrito_demo.md` (y `_ANCLAS` en `test_demo_bli_e2e.py` si cambió alguna frase ancla).
 2. **Ensayo previo con llave sintética** en carpeta temporal bajo `/tmp`: verificar que `dike constancia` emite commitment con 4 verificadas, 2 fallidas y 1 sola advertencia.
-3. **Comprobar `key_id` de la llave real** (pasando la ruta en `~/.local/share/lexo-custody/lexo-alpha/` a OpenSSL sin leer ni imprimir jamás la llave privada): debe dar `3c7b3fde075efbe3`.
+3. **Comprobar `key_id` de la llave real** (pasando a OpenSSL la ruta de la llave en su custodia local, sin leer ni imprimir jamás la llave privada): debe dar `3c7b3fde075efbe3`.
 4. **Emitir la firma n.º 3 a `/tmp`** pasando la ruta en `LEXO_CONTENT_SIGNING_KEY_PATH`.
 5. **Comprobar la clave pública emitida** byte a byte contra `content-signing-key.pub`.
 6. **Verificar por los dos caminos** de `KEYS.md` (en aislamiento sin `/home` ni red) y ejecutar el **control negativo** (`citas_fallidas` `2 -> 0` debe salir `1`).

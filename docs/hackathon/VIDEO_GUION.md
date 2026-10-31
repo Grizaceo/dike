@@ -113,7 +113,7 @@ Resumen: 4/6 citas verificadas
 ### Scene 3 (1:05 – 1:40) — The Signed Commitment & What It Does Not Claim
 
 **Narration (EN):**
-> "With `--emit-commitment` and `--sign`, Diké emits `commitment.json` and `commitment.sig.json`. The commitment uses a closed schema: it contains only the four verified provisions with their source text SHA-256 hashes, `pack_hash`, and the counts—`citas_verificadas: 4`, `citas_fallidas: 2`. Neither the brief's prose, nor its file path, nor the two rejected citations enter the commitment. And inside `alcance` and `advertencias`, the commitment explicitly states what it does NOT claim: it checks existence, source integrity, and in-force status in the local snapshot—not whether the statute substantively supports the lawyer's argument, not signer identity, and not an accredited legal timestamp under Chilean Law 19.799."
+> "With `--emit-commitment` and `--sign`, Diké emits `commitment.json` and `commitment.sig.json`. The commitment uses a closed schema: it contains only the four verified provisions with their source text SHA-256 hashes, `pack_hash`, and the counts—`citas_verificadas: 4`, `citas_fallidas: 2`. Neither the brief's prose, nor its file path, nor the two rejected citations enter the commitment. And inside `alcance` and `advertencias`, the commitment states its own limit: it attests reference identity, source-text integrity, provenance, and in-force status in the local snapshot—not whether the statute substantively supports the lawyer's argument. The other limits are Diké's, stated in the kit and in the video: the signature does not prove signer identity, and it is not an accredited legal timestamp under Chilean Law 19.799."
 
 **Exact Commands:**
 ```bash

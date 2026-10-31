@@ -4,8 +4,8 @@
   "docs/hackathon/BUIDL_DORAHACKS_1904.md": "6fc893d555e70e35df1d46d2b84a93db757a64249259bce6827813603a8181b8",
   "docs/hackathon/KEYS.md": "6c384f1dbf5a27975c70aa4aff2b972ea15a3549b67b7a7bfeca139510ce0eaa",
   "docs/hackathon/REGISTRO_DE_FIRMAS.md": "dcec3e72f44dae3ae5e6b037c082b1af5dd27fccdb080684d7389de0d8eb1a63",
-  "docs/hackathon/REVISION_ESCRITO_DEMO.md": "7c8415ee3dbc5f411c30ceeac09f7d662a2603f6cd124a684cfad2fb1046521b",
-  "docs/hackathon/VIDEO_GUION.md": "8d8e4e0f433f3768cc17cc1ba199b39aaf2cd59973bf64678cc3db251debeb2e",
+  "docs/hackathon/REVISION_ESCRITO_DEMO.md": "f3904e77e849e9d00fca5a8bf07f36466b773f0a3287a3df459e1966d5c4e608",
+  "docs/hackathon/VIDEO_GUION.md": "6b2604d474088aed235ab5822415dcb0bac3d9ab6e0b53ddd8f4fc7b32fce302",
   "docs/hackathon/commitment.json": "e0406e7d23d8ff3b2bbbe8de6cf2fa4985641f3612fb38d169066e2835d12c82",
   "docs/hackathon/commitment.sig.json": "f12c8aa2371ef212f73c2894c69513173659925daf74c872ec7ddad1eb0aadf4",
   "docs/hackathon/content-signing-key.pub": "bdfca62a8786d4178e4a18070f4784e5b710f7d5813459227b2d51d972b25d8d",
@@ -124,6 +124,6 @@
   "shared/schemas/normative_interaction_frame.v1.json": "752529e199fddeac89ce87b068f0b95099a7476f05da84d8a2c4bb092480bd7a",
   "shared/schemas/validation_contracts.py": "207ba3f288810254dc1c64e656aa1184b90b8c282aabff12c00c2f764a947486"
  },
- "commit_de_origen": "51c02402",
+ "commit_de_origen": "50e257d4",
  "nota": "Lo que este proyecto recibió de su repositorio de origen. Lo escribe la exportación; no editar a mano."
 }

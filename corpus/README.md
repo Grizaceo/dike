@@ -24,6 +24,14 @@ dike starter --user demo install /tmp/chile-base --name chile-base
 every article's `textSha256` matches its text) before sealing it. It does not
 use the network.
 
+## Attribution and license
+
+Source: *Ley Chile – Biblioteca del Congreso Nacional*, retrieved 2026-08-18.
+
+The corpus is not under this repository's MIT License, which covers the
+software, schemas, verification scripts and documentation. The terms below
+apply to it.
+
 ## Terms the package declares
 
 These are the package's own statements, in the `componentLicenses` and `aiUse`

@@ -7,10 +7,10 @@
 
 # Diké
 
-Diké checks every statutory citation in a Chilean legal brief against a local,
-hash-identified copy of the law, and **refuses to certify what it cannot
-prove**. For the citations it did verify it can emit a small signed
-*commitment* that anyone can check offline, without Diké's code.
+Diké checks every pinpoint statutory citation it detects in a Chilean legal
+brief against a local, hash-identified copy of the law, and **refuses to
+certify what it cannot prove**. For the citations it did verify it can emit a
+small signed *commitment* that anyone can check offline, without Diké's code.
 
 This repository is the citation-verification engine on its own: the command
 line tool, a corpus of 25 Chilean statutes, a signed example and the kit to
@@ -33,7 +33,7 @@ That runs the demo end to end on a synthetic brief with six citations:
 
 1. `dike constancia` verifies four of them against the corpus;
 2. it refuses the other two — *artículo 60* (no statute named: ambiguous) and
-   *artículo 9999 del Código del Trabajo* (does not exist) — and says why;
+   *artículo 9999 del Código del Trabajo* (not in the corpus) — and says why;
 3. it emits a commitment that lists only the four verified citations, signed
    with a throwaway key generated on the spot;
 4. the signature is verified twice by code that is not Diké's: a standalone
@@ -136,7 +136,7 @@ official text of today: the `pack_hash` in every commitment says which copy.
 ## Status and limits
 
 - **Tested on Linux only.** The engine: on Arch, and in the Debian 13 image
-  this repository builds (552 tests pass there, 3 are skipped and say why).
+  this repository builds (559 tests pass there, 3 are skipped and say why).
   The two verification paths of the kit: also on Debian 12 and Ubuntu 22.04
   and 24.04.
 - **One command.** This distribution carries `dike constancia` and
