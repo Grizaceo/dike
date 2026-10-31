@@ -12,6 +12,8 @@ brief against a local, hash-identified copy of the law, and **refuses to
 certify what it cannot prove**. For the citations it did verify it can emit a
 small signed *commitment* that anyone can check offline, without Diké's code.
 
+**Demo video (2:38):** <https://youtu.be/yhASRTO4fXI>
+
 This repository is the citation-verification engine on its own: the command
 line tool, a corpus of 25 Chilean statutes, a signed example and the kit to
 verify it.
